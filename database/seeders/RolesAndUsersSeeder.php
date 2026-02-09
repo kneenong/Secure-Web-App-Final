@@ -15,7 +15,7 @@ class RolesAndUsersSeeder extends Seeder
         Role::firstOrCreate(['name' => 'admin']);
         Role::firstOrCreate(['name' => 'user']);
 
-        // create admin
+        // create admin account
         $admin = User::firstOrCreate(
             ['email' => 'admin@example.com'],
             [
@@ -25,9 +25,9 @@ class RolesAndUsersSeeder extends Seeder
         );
         $admin->assignRole('admin');
 
-        // create normal user
+        // create normal user account
         $user = User::firstOrCreate(
-            ['email'=>'user@example.com'],
+            ['email' => 'user@example.com'],
             [
                 'name' => 'Normal User',
                 'password' => Hash::make('User@12345')

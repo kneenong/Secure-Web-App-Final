@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>{{ config('app.name', 'Secure Web App') }}</title>
+
+    <!-- Tailwind CSS -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- Modern font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #f5f5f5; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md py-4">
+        <div class="container mx-auto flex items-center justify-between px-6">
+            <!-- Logo -->
+            <a href="{{ route('dashboard') }}">
+                <img src="{{ asset('images/logo.png') }}" alt="Secure Web App Logo" class="w-16 h-16 object-contain">
+            </a>
+
+            <!-- Logout -->
+            <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" 
+                        class="bg-black text-white px-4 py-2 rounded-lg font-semibold hover:bg-white hover:text-black hover:border hover:border-black transition">
+                    Logout
+                </button>
+            </form>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 container mx-auto px-6 py-8">
+        {{ $slot }}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white shadow-md py-4 mt-auto text-center text-gray-500 text-sm">
+        &copy; {{ date('Y') }} Secure Web App. All rights reserved.
+    </footer>
+
+    <!-- Auto logout on back button -->
+    <script>
+        if (window.history && window.history.pushState) {
+            window.history.pushState(null, null, window.location.href);
+
+            window.onpopstate = function() {
+                // Optional: show logging out message
+                document.body.innerHTML = "<h2 class='text-center mt-20 text-xl'>Logging out...</h2>";
+                document.getElementById('logout-form').submit();
+            };
+        }
+    </script>
+
+</body>
+</html>
