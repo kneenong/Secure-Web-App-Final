@@ -14,6 +14,6 @@
 - UI polishing
 
 ### 👥 Task Distribution
-- Member 1: Project setup, authentication scaffolding
-- Member 2: UI styling, login/register pages
-- Member 3: Route setup and dashboard layout
+- Cempron: Project setup, dashboard layout
+- De Gracia: UI styling, Project setup 
+- Racho: Route setup, authentication scaffolding, login/register pages
